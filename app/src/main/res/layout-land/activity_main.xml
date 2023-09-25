@@ -8,52 +8,57 @@
 
     <ImageView
         android:id="@+id/imHoursLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:paddingLeft="15dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imHoursRight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/five" />
+        app:srcCompat="@drawable/five5" />
 
     <ImageView
         android:id="@+id/imHoursRight"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/imHoursLeft"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imDots"
         app:layout_constraintStart_toEndOf="@+id/imHoursLeft"
         app:layout_constraintTop_toTopOf="@id/imHoursLeft"
-        app:srcCompat="@drawable/five" />
+        app:srcCompat="@drawable/five5" />
 
     <ImageView
         android:id="@+id/imDots"
         android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        app:layout_constraintBottom_toBottomOf="@id/imHoursLeft"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imMinsLeft"
         app:layout_constraintStart_toEndOf="@+id/imHoursRight"
         app:layout_constraintTop_toTopOf="@id/imHoursLeft"
-        app:srcCompat="@drawable/dots" />
+        app:srcCompat="@drawable/dots0" />
 
     <ImageView
         android:id="@+id/imMinsLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/imHoursLeft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imMinsRight"
         app:layout_constraintStart_toEndOf="@+id/imDots"
         app:layout_constraintTop_toTopOf="@id/imHoursLeft"
-        app:srcCompat="@drawable/five" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/five5" />
 
     <ImageView
         android:id="@+id/imMinsRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingEnd="15dp"
-        app:layout_constraintBottom_toBottomOf="@id/imHoursLeft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imMinsLeft"
-        app:layout_constraintTop_toTopOf="@id/imHoursLeft"
-        app:srcCompat="@drawable/five" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/five5" />
 
     <ImageView
         android:id="@+id/imSecLeft"
