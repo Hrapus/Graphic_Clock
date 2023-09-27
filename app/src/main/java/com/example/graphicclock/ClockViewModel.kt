@@ -1,16 +1,20 @@
 package com.example.graphicclock
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.delay
-import java.time.LocalTime
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.time.LocalTime
 
 class ClockViewModel : ViewModel() {
+
+    private val _isStarted = MutableLiveData(false)
+    private var isStarted = _isStarted
 
     private val _isHoursLeft = MutableLiveData<Int>()
     var isHoursLeft: LiveData<Int> = _isHoursLeft
@@ -30,27 +34,31 @@ class ClockViewModel : ViewModel() {
     private val _isSecRight = MutableLiveData<Int>()
     var isSecRight: LiveData<Int> = _isSecRight
 
+    private val _isDotsOn = MutableLiveData<Boolean>(true)
+    var isDotsOn: LiveData<Boolean> = _isDotsOn
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun getTime() {
-        viewModelScope.launch {
-            while (true) {
-                val current = LocalTime.now()
+        if (!isStarted.value!!) {
+            viewModelScope.launch {
+                isStarted.value = true
+                while (true) {
+                    val current = LocalTime.now()
 
-                _isHoursLeft.value = current.hour / 10
-                _isHoursRight.value = current.hour % 10
+                    _isHoursLeft.value = current.hour / 10
+                    _isHoursRight.value = current.hour % 10
 
-                _isMinLeft.value = current.minute / 10
-                _isMinRight.value = current.minute % 10
+                    _isMinLeft.value = current.minute / 10
+                    _isMinRight.value = current.minute % 10
 
-                _isSecLeft.value = current.second / 10
-                _isSecRight.value = current.second % 10
+                    _isSecLeft.value = current.second / 10
+                    _isSecRight.value = current.second % 10
 
-                delay(1000)
+                    _isDotsOn.value = !_isDotsOn.value!!
+                    delay(500)
+                }
             }
-
         }
-
-
     }
-
 }

@@ -4,8 +4,6 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -26,8 +24,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+        val orientation = this.resources.configuration.orientation
 
-        viewModel.getTime()
+
+
 
         viewModel.isSecLeft.observe(this) { secLeft ->
             binding.imSecLeft.setImageResource(getImageResFromDigit(secLeft))
@@ -50,41 +50,39 @@ class MainActivity : AppCompatActivity() {
             binding.imHoursLeft.setImageResource(getImageResFromDigit(hoursLeft))
 
         }
-        blinking()
-    }
 
 
-    fun blinking(){
-        val orientation = this.resources.configuration.orientation
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            binding.imDots.visibility = View.GONE
-        } else {
-            val anim: Animation = AlphaAnimation(0.0f, 1.0f)
-            anim.duration = 10
-            anim.startOffset = 500
-            anim.repeatMode = Animation.REVERSE
-            anim.repeatCount = Animation.INFINITE
-            binding.imDots.startAnimation(anim)
-        }
+        viewModel.isDotsOn.observe(this) { it ->
 
-
-    }
-
-    private fun getImageResFromDigit(digit: Int?): Int {
-        return when (digit) {
-            0 -> R.drawable.zero0
-            1 -> R.drawable.one1
-            2 -> R.drawable.two2
-            3 -> R.drawable.three3
-            4 -> R.drawable.four4
-            5 -> R.drawable.five5
-            6 -> R.drawable.six6
-            7 -> R.drawable.seven7
-            8 -> R.drawable.eight8
-            9 -> R.drawable.nine9
-            else -> {
-                R.drawable.zero0
+            if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+                binding.imDots.setImageResource(R.drawable.dots00)
+            } else {
+                if (it == true) {
+                    binding.imDots.setImageResource(R.drawable.dots0)
+                } else {
+                    binding.imDots.setImageResource(R.drawable.dots00)
+                }
             }
+        }
+        viewModel.getTime()
+    }
+
+}
+
+private fun getImageResFromDigit(digit: Int?): Int {
+    return when (digit) {
+        0 -> R.drawable.zero0
+        1 -> R.drawable.one1
+        2 -> R.drawable.two2
+        3 -> R.drawable.three3
+        4 -> R.drawable.four4
+        5 -> R.drawable.five5
+        6 -> R.drawable.six6
+        7 -> R.drawable.seven7
+        8 -> R.drawable.eight8
+        9 -> R.drawable.nine9
+        else -> {
+            R.drawable.zero0
         }
     }
 }
