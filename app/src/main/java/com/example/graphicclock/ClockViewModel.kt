@@ -13,8 +13,7 @@ import java.time.LocalTime
 
 class ClockViewModel : ViewModel() {
 
-    private val _isStarted = MutableLiveData(false)
-    private var isStarted = _isStarted
+    private val isStarted = MutableLiveData(false)
 
     private val _isHoursLeft = MutableLiveData<Int>()
     var isHoursLeft: LiveData<Int> = _isHoursLeft
